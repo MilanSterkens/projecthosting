@@ -1,0 +1,60 @@
+version: '3.1'
+services:
+# nginx-proxy:
+#    image: nginxproxy/nginx-proxy
+#    ports:
+#    - "80:80"
+#    volumes:
+#    - /var/run/docker.sock:/tmp/docker.sock:ro
+
+    
+
+ web-web1:
+  build: php-apache/.
+  restart: always
+  depends_on:
+  - db-web1
+  volumes:
+  - ./www:/var/www/html
+  expose:
+  - "80"
+  environment:
+   VIRTUAL_HOST: 'web.website1.local'
+  container_name: contweb-web1
+
+
+ db-web1:
+  image: mysql:5.7.13
+  restart: always
+  environment:
+   MYSQL_DATABASE: 'db'
+   MYSQL_USER: 'user'
+   MYSQL_PASSWORD: 'password'
+   MYSQL_ROOT_PASSWORD: 'password'
+  expose:
+  - "3306"
+  container_name: contsql-web1
+  volumes:
+  - db_data-web1:/var/lib/mysql
+
+ phpmyadmin-web1:
+  image: phpmyadmin/phpmyadmin
+  expose:
+  - "80"
+  environment:
+   PMA_HOST: 'db-web1'
+   MYSQL_USER: 'user'
+   MYSQL_PASSWORD: 'password'
+   MYSQL_ROOT_PASSWORD: 'password'
+   VIRTUAL_HOST: 'phpmyadmin.website1.local'
+  container_name: contphpmyadmin-web1
+
+  
+
+volumes:
+ db_data-web1:
+
+networks: 
+ default: 
+  external: 
+   name: net-hosting 
