@@ -5,4 +5,4 @@ Schema infrastructure:\
 ![hosting infrastructure](./resources/schema_english.png)
 
 Schema Docker:\
-![schema docker](./resources/schema_docker)
+![schema docker](./resources/docker_schema)
