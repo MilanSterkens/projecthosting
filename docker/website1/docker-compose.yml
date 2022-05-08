@@ -1,22 +1,22 @@
 version: '3.1'
 services:
 
- web-web1:
+ web:
   build: php-apache/.
   restart: always
   depends_on:
-  - db-web1
+  - db
   volumes:
   - ./www:/var/www/html
   expose:
   - "80"
   environment:
-   VIRTUAL_HOST: 'web.website1.local'
-  container_name: contweb-web1
+   VIRTUAL_HOST: 'web.${DOMAIN}.local'
+  container_name: contweb-${UID}
 
 
- db-web1:
-  image: mysql:5.7.13
+ db:
+  image: mysql:${MYSQL_VERSION}
   restart: always
   environment:
    MYSQL_DATABASE: 'db'
@@ -25,28 +25,23 @@ services:
    MYSQL_ROOT_PASSWORD: 'password'
   expose:
   - "3306"
-  container_name: contsql-web1
+  container_name: contsql-${UID}
   volumes:
-  - db_data-web1:/var/lib/mysql
+  - ./mysql:/var/lib/mysql
 
- phpmyadmin-web1:
+ phpmyadmin:
   image: phpmyadmin/phpmyadmin
   expose:
   - "80"
   environment:
-   PMA_HOST: 'db-web1'
-   MYSQL_USER: 'user'
-   MYSQL_PASSWORD: 'password'
-   MYSQL_ROOT_PASSWORD: 'password'
-   VIRTUAL_HOST: 'phpmyadmin.website1.local'
-  container_name: contphpmyadmin-web1
+   PMA_HOST: 'contsql-${UID}'
+   MYSQL_USER: '${MYSQL_USER_ENV}'
+   MYSQL_PASSWORD: '${MYSQL_PASSWORD_ENV}'
+   MYSQL_ROOT_PASSWORD: '${MYSQL_PASSWORD_ENV}'
+   VIRTUAL_HOST: 'phpmyadmin.${DOMAIN}.local'
+  container_name: contphpmyadmin-${UID}
 
-  
-
-volumes:
- db_data-web1:
 
 networks: 
  default: 
-  external: 
-   name: net-hosting 
+  name: net-hosting
