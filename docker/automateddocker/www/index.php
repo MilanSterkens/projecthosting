@@ -5,7 +5,7 @@
 <meta http-equiv="refresh" content="8">
 </head>
 <?php
-$conn = mysqli_connect('db-web1', 'user', 'password', 'db');
+$conn = mysqli_connect('contsql-milansterkensweb1', 'user', 'password', 'db');
 $query = 'SELECT naam From naam';
 $result = mysqli_query($conn, $query);
 echo '<h1>';
