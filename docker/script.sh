@@ -77,7 +77,7 @@ RUN docker-php-ext-install mysqli' > $WEBID/php-apache/dockerfile
 
 echo '<html>
 <head>
- <title>Milestone 2</title>
+ <title>Milestone 3</title>
  <meta charset="utf-8">
 <meta http-equiv="refresh" content="8">
 </head>
@@ -96,5 +96,9 @@ mysqli_close($conn);
 </body>
 </html>' > $WEBID/www/index.php
 
+echo "starting containers..."
+
+docker-compose -f $WEBID/docker-compose.yml up -d
 
 echo "Finished!"
+echo "Your virtual host names are 'web.$DOMAIN.teamsixhosting' & 'phpmyadmin.$DOMAIN.teamsixhosting'"
