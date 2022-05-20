@@ -1,7 +1,7 @@
 #!/bin/bash
 
-WEBID="website$(($RANDOM%10000))"
-UID="milansterkens$WEBID"
+#declare variables
+WEBID="web$(($RANDOM%10000))"
 DOMAIN="milansterkens$WEBID"
 MYSQL_VERSION="5.7.13"
 MYSQL_USER_ENV="user"
@@ -34,8 +34,8 @@ services:
   expose:
   - "80"
   environment:
-   VIRTUAL_HOST: 'web.$DOMAIN.local'
-  container_name: 'contweb-$UID'
+   VIRTUAL_HOST: 'web.$DOMAIN.teamsixhosting'
+  container_name: 'contweb-$WEBID'
 
 
  db:
@@ -48,7 +48,7 @@ services:
    MYSQL_ROOT_PASSWORD: '$MYSQL_PASSWORD_ENV'
   expose:
   - "3306"
-  container_name: 'contsql-$UID'
+  container_name: 'contsql-$WEBID'
   volumes:
   - ./mysql:/var/lib/mysql
 
@@ -57,12 +57,12 @@ services:
   expose:
   - "80"
   environment:
-   PMA_HOST: 'contsql-$UID'
+   PMA_HOST: 'contsql-$WEBID'
    MYSQL_USER: '$MYSQL_USER_ENV'
    MYSQL_PASSWORD: '$MYSQL_PASSWORD_ENV'
    MYSQL_ROOT_PASSWORD: '$MYSQL_PASSWORD_ENV'
-   VIRTUAL_HOST: 'phpmyadmin.$DOMAIN.local'
-  container_name: 'contphpmyadmin-$UID'
+   VIRTUAL_HOST: 'phpmyadmin.$DOMAIN.teamsixhosting'
+  container_name: 'contphpmyadmin-$WEBID'
 
 
 networks: 
@@ -75,26 +75,26 @@ RUN apt-get update
 RUN docker-php-ext-install mysqli' > $WEBID/php-apache/dockerfile
 
 
-echo "<html>
+echo '<html>
 <head>
  <title>Milestone 2</title>
  <meta charset="utf-8">
 <meta http-equiv="refresh" content="8">
 </head>
 <?php
-$conn = mysqli_connect('contsql-$UID', '$MYSQL_USER_ENV', '$MYSQL_PASSWORD_ENV', 'db');
-$query = 'SELECT naam From naam';
+$conn = mysqli_connect("'contsql-$WEBID'", "'$MYSQL_USER_ENV'", "'$MYSQL_PASSWORD_ENV'", "db");
+$query = "SELECT naam From naam";
 $result = mysqli_query($conn, $query);
-echo '<h1>';
+echo "<h1>";
 while($value=$result->fetch_array(MYSQLI_ASSOC)){
-echo $value['naam'];
+echo $value["naam"];
 }
-echo ' is the king of the world!!!</h1>';
+echo " is the king of the world!!!</h1>";
 $result->close();
 mysqli_close($conn);
 ?>
 </body>
-</html>" > $WEBID/www/index.php
+</html>' > $WEBID/www/index.php
 
 
 echo "Finished!"
