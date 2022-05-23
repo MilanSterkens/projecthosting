@@ -16,7 +16,10 @@ For everything to work you'll need:
 
 You'll find everything you need under the _docker_ directory. There's two components you will use: The Nginx Reverse Proxy under the directory _nginx_ and the bash script _script.sh_. 
 
-The reverse proxy needs to be started __once__ at first by going to its directory and using docker compose to build and run the docker container.
+The reverse proxy needs to be started __once__ at first by going to its directory and using docker compose to build and run the docker container. A network has to be created too.
+```bash
+docker network create net-hosting
+```
 
 ```bash
 cd ./projecthosting/docker/nginx
