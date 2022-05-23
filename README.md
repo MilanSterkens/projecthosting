@@ -57,7 +57,7 @@ first you shut down al associated docker containers by going to the site's folde
 docker-compose down
 docker-compose rm -f
 ```
-After shit you can delete the whole directory if you want.
+After this you can delete the whole directory if you want.
 
 ### TODO
 - add laravel functionality
