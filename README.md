@@ -14,7 +14,7 @@ For everything to work you'll need:
 ## Setup
 
 
-You'll find everything you need under the _docker_ directory. There's two components you will use: The Nginx Reverse Proxy under the directory _nginx_ and the bash script _script.sh_. 
+You'll find everything you need under the `docker` directory. There's two components you will use: The Nginx Reverse Proxy under the directory _nginx_ and the bash script `script.sh`. 
 
 The reverse proxy needs to be started __once__ at first by going to its directory and using docker compose to build and run the docker container. A network has to be created too.
 ```bash
@@ -36,7 +36,7 @@ chmod +x ./script.sh
 
 The script creates a whole directory for your website. It will be named something like __webXX__. 
 
-In this folder you'll find another folder __www__ where your website should be stored, and __mysql__ where all sql data is stored.
+In this folder you'll find another folder `www` where your website should be stored, and `mysql` where all sql data is stored.
 
 The script will tell you the Virtual Host names of your site.
 
