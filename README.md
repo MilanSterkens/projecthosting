@@ -1,11 +1,16 @@
 # Project hosting Team 6
-## Shared hosting platform
+## Shematics
 
 Schema infrastructure:\
 ![hosting infrastructure](./resources/schema_english.png)
 
-Schema Docker:\
+Schema Docker lamp:\
 ![schema docker](./resources/docker_schema.png)
+
+Schema Docker-Laravel Bash script:\
+![schema docker](./resources/laravel_bash.png)
+
+
 
 ## Prerequisites
 For everything to work you'll need:
