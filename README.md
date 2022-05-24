@@ -26,21 +26,35 @@ cd ./projecthosting/docker/nginx
 docker-compose up -d
  ```
 
-Then we give the bash script execute rights and run the script. For each new website, you just execute the script again.
+Then we give the bash script execute rights and run the script. For each new __laravel app__, you just execute the script again.
 
 ```bash
 cd ../
-chmod +x ./script.sh
-./script.sh
+chmod +x ./script_laravel.sh
+./script_laravel.sh
+```
+__OR__
+
+If you just want a normal __lamp stack__ execute this one.
+```bash
+cd ../
+chmod +x ./script_lamp.sh
+./script_lamp.sh
 ```
 
 The script creates a whole directory for your website. It will be named something like __webXX__. 
 
-In this folder you'll find another folder `www` where your website should be stored, and `mysql` where all sql data is stored.
+In this folder you'll find another folder `www` where your laravel website should be stored, and `mysql` where all sql data is stored.
 
 The script will tell you the Virtual Host names of your site.
 
 Everything should now be up and running!
+
+after adding the your project files to `www`, you can run the next command to install the dependencies if you have a composer.json file
+
+```bash
+docker-compose exec web composer install
+```
 
 To visit the website, you add the virtual host names together with the machine's ip to your hosts file. It will look someting like this:
 ```
@@ -60,4 +74,4 @@ docker-compose rm -f
 After this you can delete the whole directory if you want.
 
 ### TODO
-- add laravel functionality
+- finish script
