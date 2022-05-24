@@ -81,6 +81,7 @@ services:
 
  phpmyadmin:
   image: phpmyadmin/phpmyadmin
+  restart: unless-stopped
   expose:
   - "80"
   environment:
