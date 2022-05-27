@@ -1,3 +1,0 @@
-FROM php:7.0.30-apache
-RUN apt-get update
-RUN docker-php-ext-install mysqli
